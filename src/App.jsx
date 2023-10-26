@@ -1,8 +1,8 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+
 import Homepage from "./components/Homepage/Homepage";
 import Navbar from "./components/Navbar/Navbar";
-
-import "bootstrap/dist/css/bootstrap.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

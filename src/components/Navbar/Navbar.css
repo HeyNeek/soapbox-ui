@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 10%;
+  width: 8%;
   height: 100%;
   background-color: #283044;
   color: #fff;
@@ -32,4 +32,16 @@
 .navbar-selection:hover {
   color: #66fcf1;
   cursor: pointer;
+}
+
+/*media query that whenever the screen is less than 1920px it will hide the navbar completely
+add to it later to maybe make it a tab system*/
+@media (max-width: 1600px) {
+  .left-navbar {
+    visibility: hidden;
+  }
+
+  .navbar-selection {
+    visibility: hidden;
+  }
 }
