@@ -15,6 +15,7 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
+      <h1 className="homepage-header">Latest posts</h1>
       {postArray.map((post) => {
         return (
           <Post

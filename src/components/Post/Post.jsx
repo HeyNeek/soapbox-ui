@@ -1,14 +1,28 @@
 import PropTypes from "prop-types";
 import "../Post/Post.css";
 
+import Card from "react-bootstrap/Card";
+
 const Post = ({ title, content, author }) => {
   return (
-    <div className="post">
-      <h2 className="title">{title}</h2>
-      <h4 className="author">By {author}</h4>
-      <br />
-      <p className="content">{content}</p>
-    </div>
+    <Card
+      style={{
+        width: "100%",
+        marginBottom: "10px",
+        backgroundColor: "#c5c6c7",
+      }}
+    >
+      <Card.Body>
+        <Card.Title>{title}</Card.Title>
+        <Card.Subtitle
+          className="mb-2 text-muted"
+          style={{ cursor: "pointer" }}
+        >
+          By {author}
+        </Card.Subtitle>
+        <Card.Text>{content}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 
