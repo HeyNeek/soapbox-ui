@@ -1,0 +1,35 @@
+.left-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.left-navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; /* Remove the default margin */
+}
+
+.navbar-selection {
+  display: flex;
+  align-items: center; /* Center vertically */
+  margin-bottom: 0px;
+  padding: 10px; /* Adjust padding as needed */
+  margin: 10px;
+}
+
+.navbar-selection > div {
+  flex: 1; /* Grow to fill the available space horizontally */
+  text-align: center; /* Center text horizontally */
+  font-size: 20px;
+}
+
+.navbar-selection:hover {
+  color: aqua;
+  cursor: pointer;
+}
