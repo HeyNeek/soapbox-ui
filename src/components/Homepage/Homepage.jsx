@@ -1,6 +1,10 @@
 import Post from "../Post/Post";
 import "../Homepage/Homepage.css";
 
+// import Container from "react-bootstrap/Container";
+// import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 const Homepage = () => {
   const postArray = [];
 
@@ -15,17 +19,19 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-header">Latest posts</h1>
-      {postArray.map((post) => {
-        return (
-          <Post
-            title={post.title}
-            author={post.author}
-            content={post.content}
-            key={post.title}
-          />
-        );
-      })}
+      <Col>
+        <h1 className="homepage-header">Latest posts</h1>
+        {postArray.map((post) => {
+          return (
+            <Post
+              title={post.title}
+              author={post.author}
+              content={post.content}
+              key={post.title}
+            />
+          );
+        })}
+      </Col>
     </div>
   );
 };

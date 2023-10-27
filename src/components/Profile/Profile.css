@@ -1,0 +1,16 @@
+.profile {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Optionally, make the container fill the entire viewport height */
+}
+
+.profile-column {
+  text-align: center; /* Center the content inside the column */
+}
+
+.profile-pic {
+  width: 500px; /* Set the desired width */
+  height: 500px; /* Set the desired height */
+  border-radius: 50%; /* Makes it round */
+}

@@ -16,22 +16,21 @@
 }
 
 .navbar-selection {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0px;
-  padding: 10px;
-  margin: 10px;
-}
-
-.navbar-selection > div {
-  flex: 1;
-  text-align: center;
-  font-size: 20px;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 0px !important;
+  padding: 10px !important;
+  margin: 10px !important;
+  text-decoration: none;
+  font-size: 25px;
+  flex: 1 !important;
+  text-align: center !important;
+  color: var(--bs-heading-color);
 }
 
 .navbar-selection:hover {
-  color: #66fcf1;
-  cursor: pointer;
+  color: #66fcf1 !important;
+  cursor: pointer !important;
 }
 
 /*media query that whenever the screen is less than 1920px it will hide the navbar completely
