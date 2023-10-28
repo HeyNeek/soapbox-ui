@@ -2,7 +2,7 @@ import { Col } from "react-bootstrap";
 
 const Write = () => {
   return (
-    <div>
+    <div className="write">
       <Col>
         <h1>Write here!</h1>
       </Col>
