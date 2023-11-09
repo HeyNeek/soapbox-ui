@@ -13,8 +13,18 @@ const Profile = ({ name, picture, bio, location }) => {
     },
     {
       game: "Valorant",
-      peakRank: "Diamond 1",
+      peakRank: "Platinum 1",
       gamertag: "Neek#1997",
+    },
+    {
+      game: "Counter-Strike 2",
+      peakRank: "Gold Nova 2",
+      gamertag: "SecondServing",
+    },
+    {
+      game: "Street Fighter 6",
+      peakRank: "Platinum 1",
+      gamertag: "NikoNikoNeek",
     },
   ];
 
@@ -31,19 +41,17 @@ const Profile = ({ name, picture, bio, location }) => {
           <Col>
             <Row>
               <h1 className="your-ranks-header">Your Ranks</h1>
-              <Container>
-                <ul>
-                  {exampleOfGameUserIsCompetingIn.map((game) => {
-                    return (
-                      <li key={game.gamertag}>
-                        <div>{game.game}</div>
-                        <div>Peak Rank: {game.peakRank}</div>
-                        <div>In-Game ID: {game.gamertag}</div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Container>
+              <ul className="game-ranks-list">
+                {exampleOfGameUserIsCompetingIn.map((game) => {
+                  return (
+                    <li className="game-rank-list-item" key={game.gamertag}>
+                      <div>{game.game}</div>
+                      <div>Peak Rank: {game.peakRank}</div>
+                      <div>In-Game ID: {game.gamertag}</div>
+                    </li>
+                  );
+                })}
+              </ul>
             </Row>
             <Row>
               <h1 className="your-posts-header">Your Posts</h1>
