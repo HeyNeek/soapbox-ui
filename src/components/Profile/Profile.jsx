@@ -3,10 +3,12 @@ import supabase from "../../config/supabaseClient";
 import { useState, useEffect } from "react";
 
 import { Container, Col, Row } from "react-bootstrap";
+import { faSquareCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "../Profile/Profile.css";
 
-const Profile = ({ name, picture, bio, location }) => {
+const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -62,10 +64,36 @@ const Profile = ({ name, picture, bio, location }) => {
       <Container>
         <Row>
           <Col className="profile-column">
-            <img className="profile-pic" src={picture} />
-            <h1 className="profile-name">{name}</h1>
-            <p className="profile-location">{location}</p>
-            <p className="profile-bio">{bio}</p>
+            {userData ? (
+              <img className="profile-pic" src={userData[0].profile_pic} />
+            ) : (
+              <p className="profile-pic">Loading...</p>
+            )}
+            <div className="name-and-verified-container">
+              {userData ? (
+                <h1 className="profile-name">{userData[0].user_name}</h1>
+              ) : (
+                <p className="profile-name">Loading...</p>
+              )}
+              {userData && userData[0].verified ? (
+                <FontAwesomeIcon
+                  icon={faSquareCheck}
+                  className="checkmark-icon"
+                />
+              ) : (
+                <p>Loading...</p>
+              )}
+            </div>
+            {userData ? (
+              <p className="profile-location">{userData[0].location}</p>
+            ) : (
+              <p className="profile-location">Loading...</p>
+            )}
+            {userData ? (
+              <p className="profile-bio">{userData[0].bio}</p>
+            ) : (
+              <p className="profile-bio">Loading...</p>
+            )}
           </Col>
           <Col>
             <Row>

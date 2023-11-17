@@ -18,6 +18,22 @@
   border-radius: 50%; /* Makes it round */
 }
 
+.profile-verified {
+  position: relative;
+}
+
+.checkmark-icon {
+  font-size: 30px;
+  padding-bottom: 6px;
+  padding-left: 15px;
+}
+
+.name-and-verified-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .your-ranks-header {
   text-align: center;
 }
