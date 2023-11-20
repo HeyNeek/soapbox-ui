@@ -10,31 +10,104 @@ import "../Profile/Profile.css";
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [userGameData, setUserGameData] = useState(null);
+  const [gameTitleArray, setGameTitleArray] = useState([]);
+  const [hasGameTitleBeenCalledOnce, setHasGameTitleBeenCalledOnce] =
+    useState(false);
+  const [errorGettingUserMessage, setErrorGettingUserMessage] = useState(null);
+  const [errorGettingGamesMessage, setErrorGettingGamesMessage] =
+    useState(null);
 
   //NOTE I DISABLED RLS SHOULD PROBABLY TURN THAT BACK ON WHEN I GET MORE SERIOUS
-  useEffect(() => {
-    const fetchData = async () => {
+  //first GET call gets the userData from the database
+  //dont hardcode the user later, right now its just fetching all users but we dont want that.
+  //probably want to query by username or user id later
+  const fetchUserData = async () => {
+    try {
+      const { data, error } = await supabase.from("users").select();
+
+      if (error) {
+        setErrorGettingUserMessage(error.message);
+        console.log(errorGettingUserMessage);
+      } else {
+        setUserData(data);
+        console.log("userData inside useEffect: ", data);
+      }
+    } catch (error) {
+      setErrorGettingUserMessage(error.message);
+      console.log(errorGettingUserMessage);
+    }
+  };
+
+  //this function call gets all the games that belong to a user, pretty awesome. dont think this needs to be changed
+  //later...
+  const fetchUserGameData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("users_games")
+        .select("*")
+        .eq("user_id", userData[0].id);
+
+      if (error) {
+        setErrorGettingGamesMessage(error.message);
+        console.log(errorGettingGamesMessage);
+      } else {
+        setUserGameData(data);
+        console.log("userGameData inside useEffect: ", data);
+      }
+    } catch (error) {
+      setErrorGettingGamesMessage(error.message);
+      console.log(errorGettingGamesMessage);
+    }
+  };
+
+  /*what this function call does it takes the userGameData variable and it iterates through each object and it makes 
+  a call each iteration for the game title associated with the game_id in each users_games row*/
+  const fetchGameTitleData = async () => {
+    for (let i = 0; i < userGameData.length; i++) {
       try {
-        const { data, error } = await supabase.from("users").select();
+        const { data, error } = await supabase
+          .from("games")
+          .select("game_name")
+          .eq("id", userGameData[i].game_id);
 
         if (error) {
-          setErrorMessage(error.message);
-          console.log(errorMessage);
+          const gameTitleErrorMsg = error.message;
+          console.log(gameTitleErrorMsg);
         } else {
-          setUserData(data);
-          console.log("userData inside useEffect: ", data);
+          setGameTitleArray((prevArray) => [...prevArray, data[0]?.game_name]);
+          console.log("gameTitleData inside useEffect: ", data);
         }
       } catch (error) {
-        setErrorMessage(error.message);
-        console.log(errorMessage);
+        const gameTitleErrorMsg = error.message;
+        console.log(gameTitleErrorMsg);
       }
-    };
+    }
+  };
 
-    fetchData();
+  useEffect(() => {
+    fetchUserData();
   }, []);
 
+  //once the userData exists we will call the GET call for the userGameData
+  useEffect(() => {
+    if (userData && userData.length > 0) {
+      fetchUserGameData();
+    }
+  }, [userData]);
+
+  //once userGameData exists we will call the GET calls for the Game titles associated with the user
+  useEffect(() => {
+    //checking not only if the userGameData exists but also if this call has been made already
+    if (userGameData && !hasGameTitleBeenCalledOnce) {
+      fetchGameTitleData();
+      setHasGameTitleBeenCalledOnce(true); //after we make the fetch call we set the flag to true so this call doesnt happen again, since it makes multiple GET calls for each game title
+    }
+  }, [userGameData]);
+
   console.log("userData: ", userData);
+  console.log("userGameData: ", userGameData);
+  console.log("gameTitleArray: ", gameTitleArray);
 
   const exampleOfGameUserIsCompetingIn = [
     {
