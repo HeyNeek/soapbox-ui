@@ -1,3 +1,18 @@
 .write {
   height: 100vh; /* Optionally, make the container fill the entire viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-area {
+  height: 85%;
+  width: 80%;
+}
+
+.title-area {
+  width: 50%;
+  height: 4%;
+  font-size: 140%;
 }
