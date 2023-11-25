@@ -12,6 +12,7 @@ const Profile = () => {
   const [userData, setUserData] = useState(null);
   const [userGameData, setUserGameData] = useState(null);
   const [gameTitleArray, setGameTitleArray] = useState([]);
+  const [hasUserDataCalledOnce, setHasUserDataCalledOnce] = useState(false);
   const [hasGameTitleBeenCalledOnce, setHasGameTitleBeenCalledOnce] =
     useState(false);
   const [errorGettingUserMessage, setErrorGettingUserMessage] = useState(null);
@@ -31,7 +32,6 @@ const Profile = () => {
         console.log(errorGettingUserMessage);
       } else {
         setUserData(data);
-        console.log("userData inside useEffect: ", data);
       }
     } catch (error) {
       setErrorGettingUserMessage(error.message);
@@ -53,7 +53,6 @@ const Profile = () => {
         console.log(errorGettingGamesMessage);
       } else {
         setUserGameData(data);
-        console.log("userGameData inside useEffect: ", data);
       }
     } catch (error) {
       setErrorGettingGamesMessage(error.message);
@@ -76,7 +75,6 @@ const Profile = () => {
           console.log(gameTitleErrorMsg);
         } else {
           setGameTitleArray((prevArray) => [...prevArray, data[0]?.game_name]);
-          console.log("gameTitleData inside useEffect: ", data);
         }
       } catch (error) {
         const gameTitleErrorMsg = error.message;
@@ -91,8 +89,10 @@ const Profile = () => {
 
   //once the userData exists we will call the GET call for the userGameData
   useEffect(() => {
-    if (userData && userData.length > 0) {
+    //checking not only if the userData exists but also if this call has been made already
+    if (userData && userData.length > 0 && !hasUserDataCalledOnce) {
       fetchUserGameData();
+      setHasUserDataCalledOnce(true);
     }
   }, [userData]);
 
@@ -103,34 +103,23 @@ const Profile = () => {
       fetchGameTitleData();
       setHasGameTitleBeenCalledOnce(true); //after we make the fetch call we set the flag to true so this call doesnt happen again, since it makes multiple GET calls for each game title
     }
-  }, [userGameData]);
+  }, [userGameData, hasGameTitleBeenCalledOnce]);
 
   console.log("userData: ", userData);
   console.log("userGameData: ", userGameData);
   console.log("gameTitleArray: ", gameTitleArray);
 
-  const exampleOfGameUserIsCompetingIn = [
-    {
-      game: "Overwatch 2",
-      peakRank: "GM5",
-      gamertag: "Neek#1663",
-    },
-    {
-      game: "Valorant",
-      peakRank: "Platinum 1",
-      gamertag: "Neek#1997",
-    },
-    {
-      game: "Counter-Strike 2",
-      peakRank: "Gold Nova 2",
-      gamertag: "SecondServing",
-    },
-    {
-      game: "Street Fighter 6",
-      peakRank: "Platinum 1",
-      gamertag: "NikoNikoNeek",
-    },
-  ];
+  let gamesUserIsCompetingIn = [];
+
+  if (gameTitleArray) {
+    for (let i = 0; i < gameTitleArray.length; i++) {
+      gamesUserIsCompetingIn.push({
+        gamertag: userGameData[i].gamertag,
+        game: gameTitleArray[i],
+        peakRank: userGameData[i].peak_rank,
+      });
+    }
+  }
 
   return (
     <div className="profile">
@@ -171,17 +160,21 @@ const Profile = () => {
           <Col>
             <Row>
               <h1 className="your-ranks-header">Your Ranks</h1>
-              <ul className="game-ranks-list">
-                {exampleOfGameUserIsCompetingIn.map((game) => {
-                  return (
-                    <li className="game-rank-list-item" key={game.gamertag}>
-                      <div>{game.game}</div>
-                      <div>Peak Rank: {game.peakRank}</div>
-                      <div>In-Game ID: {game.gamertag}</div>
-                    </li>
-                  );
-                })}
-              </ul>
+              {gamesUserIsCompetingIn ? (
+                <ul className="game-ranks-list">
+                  {gamesUserIsCompetingIn.map((game) => {
+                    return (
+                      <li className="game-rank-list-item" key={game.gamertag}>
+                        <div>{game.game}</div>
+                        <div>Peak Rank: {game.peakRank}</div>
+                        <div>In-Game ID: {game.gamertag}</div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <h3>Loading...</h3>
+              )}
             </Row>
             <Row>
               <h1 className="your-posts-header">Your Posts</h1>
