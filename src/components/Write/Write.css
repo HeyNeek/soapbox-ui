@@ -16,3 +16,10 @@
   height: 4%;
   font-size: 140%;
 }
+
+.quill-editor {
+  background-color: white;
+  color: black;
+  width: 70%;
+  height: 75%;
+}
