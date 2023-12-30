@@ -16,6 +16,10 @@ const Write = () => {
     <div className="write">
       <h1>Create Post</h1>
       <ReactQuill className="quill-editor" value={value} onChange={setValue} />
+      <div className="button-container">
+        <button className="save-button"/>
+        <button className="post-button"/>
+      </div>
     </div>
   );
 };

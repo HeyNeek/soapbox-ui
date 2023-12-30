@@ -6,6 +6,10 @@
   justify-content: center;
 }
 
+.ql-editor {
+  background-color: white;
+}
+
 .text-area {
   height: 85%;
   width: 80%;
@@ -22,4 +26,16 @@
   color: black;
   width: 70%;
   height: 75%;
+}
+
+.button-container {
+  padding-top: 100px;
+  width: 100%;
+}
+
+.save-button {
+  background-color: red;
+  z-index: 100;
+  width: 100%;
+  height: 50%;
 }
