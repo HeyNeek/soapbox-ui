@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import supabase from "../../config/supabaseClient";
 import { useState, useEffect } from "react";
 
@@ -186,11 +185,5 @@ const Profile = () => {
   );
 };
 
-Profile.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string,
-  bio: PropTypes.string,
-  location: PropTypes.string,
-};
 
 export default Profile;

@@ -10,30 +10,13 @@ import Profile from "./components/Profile/Profile";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const exampleProfile = {
-    name: "Neek",
-    picture: "https://i.redd.it/0mizqhma5rr91.jpg",
-    location: "Houston, TX",
-    bio: "GM Ball main OW2, hardstuck Gold Gekko enjoyer, degenerate, breakfast taco enthusiast, 26 yo, GO AGANE!!!",
-  };
-
   return (
     <Container className="app-container">
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/write" element={<Write />} />
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              name={exampleProfile.name}
-              picture={exampleProfile.picture}
-              location={exampleProfile.location}
-              bio={exampleProfile.bio}
-            />
-          }
-        />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Container>
   );
