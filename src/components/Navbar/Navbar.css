@@ -33,6 +33,24 @@
   cursor: pointer !important;
 }
 
+.login-handler-div {
+  user-select: none;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.login-icon {
+  position: absolute;
+  right: 30px;
+  top: 248px;
+}
+
+.logout-icon {
+  position: absolute;
+  right: 13px;
+  top: 248px;
+}
+
 /*media query that whenever the screen is less than 1920px it will hide the navbar completely
 add to it later to maybe make it a tab system*/
 @media (max-width: 1600px) {
