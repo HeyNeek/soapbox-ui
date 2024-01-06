@@ -1,0 +1,25 @@
+.login-handler-div {
+  user-select: none;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.login-icon {
+  position: absolute;
+  right: 30px;
+  top: 248px;
+}
+
+.modal-content {
+  background-color: #212529;
+  color: #adb5bd;
+  border-color: #495057;
+}
+
+.modal-header {
+  border-color: #495057;
+}
+
+.modal-footer {
+  border-color: #495057;
+}
