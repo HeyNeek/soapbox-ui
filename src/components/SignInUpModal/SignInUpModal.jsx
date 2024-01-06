@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useState } from "react";
 
+//possibly drill in isLoggedIn state variable from Navbar component
 const SignInUpModal = () => {
   const [show, setShow] = useState(false);
 
